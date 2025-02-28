@@ -21,7 +21,7 @@ const dbconnect = require('./dbconnect.js');
 app.post('/reg', (req, res) => {
   const { sid, sname, semail, spass } = req.body;
 
-  dbconnect.query('INSERT INTO studentdetails (sid, sname, semail, spass) VALUES (?, ?, ?, ?)', 
+  dbconnect.query('INSERT INTO studentinfo (sid, sname, semail, spass) VALUES (?, ?, ?, ?)', 
   [sid, sname, semail, spass], 
   (error, results) => {
       if (error) {
@@ -40,7 +40,7 @@ localhost:5000/view
 
 // VIEW API
 app.get('/view', (req, res) => {
-  dbconnect.query('SELECT * FROM studentdetails', (error, results) => {
+  dbconnect.query('SELECT * FROM studentinfo', (error, results) => {
       if (error) {
           console.error(error);
           res.status(500).send('Error retrieving student records');
@@ -58,7 +58,7 @@ localhost:5000/search/1
 // SEARCH API
 app.get('/search/:id', (req, res) => {
   const sid = req.params.id;
-  dbconnect.query('SELECT * FROM studentdetails WHERE sid=?', [sid], (error, results) => {
+  dbconnect.query('SELECT * FROM studentinfo WHERE sid=?', [sid], (error, results) => {
       if (error) {
           console.error(error);
           res.status(500).send('Error retrieving student record');
@@ -82,7 +82,7 @@ localhost:5000/login
 app.post('/login', (req, res) => {
   const { sid, spass } = req.body;
 
-  dbconnect.query('SELECT * FROM studentdetails WHERE sid=? AND spass=?', 
+  dbconnect.query('SELECT * FROM studentinfo WHERE sid=? AND spass=?', 
   [sid, spass], 
   (error, results) => {
       if (error) {
@@ -104,7 +104,7 @@ app.put('/update/:id', (req, res) => {
     const sid = req.params.id;
     const { sname, spass } = req.body;
   
-    dbconnect.query('UPDATE studentdetails SET sname = ?, spass = ? WHERE sid = ?', 
+    dbconnect.query('UPDATE studentinfo SET sname = ?, spass = ? WHERE sid = ?', 
     [sname, spass, sid], 
     (error, results) => {
       if (error) {
@@ -120,7 +120,7 @@ app.put('/update/:id', (req, res) => {
 app.delete('/remove/:id', (req, res) => {
     const sid = req.params.id;
   
-    dbconnect.query('delete from studentdetails where sid=?', [sid], (error, results) => {
+    dbconnect.query('delete from studentinfo where sid=?', [sid], (error, results) => {
         if (error) {
             console.error(error);
             res.status(500).send('Error deleting Student');

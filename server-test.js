@@ -6,7 +6,7 @@ app.use(express.json()); // Middleware to parse JSON requests
 
 // Create a database connection
 const connection = mysql.createConnection({
-    host: '172.31.25.166', // Database-Server IP
+    host: '127.0.0.1', // Database-Server IP
     user: 'root',
     password: 'root',      // The password for MySQL
     database: 'studentDB'

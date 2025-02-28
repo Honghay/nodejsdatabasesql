@@ -1,10 +1,11 @@
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
-  host: '172.31.25.166', // Database-Server IP
+  host: 'localhost', // Database-Server IP
   user: 'root',
   password: 'root',      // The password for MySQL
-  database: 'studentDB'
+  database: 'cloudnativeDB',
+  port: '8889'
 });
 
 connection.connect((err) => {
